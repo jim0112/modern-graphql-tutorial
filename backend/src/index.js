@@ -1,30 +1,27 @@
-import { GraphQLServer, PubSub } from 'graphql-yoga';
-import db from './db';
-import Query from './resolvers/Query';
-import Mutation from './resolvers/Mutation';
-import Subscription from './resolvers/Subscription';
-import User from './resolvers/User';
-import Post from './resolvers/Post';
-import Comment from './resolvers/Comment';
+import express from 'express'
+import http from 'http'
+import mongoose from 'mongoose'
+import mongo from './mongo'
+import server from './server'
+import dotenv from 'dotenv-defaults'
 
-const pubsub = new PubSub();
-
-const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
-  resolvers: {
-    Query,
-    Mutation,
-    Subscription,
-    User,
-    Post,
-    Comment,
-  },
-  context: {
-    db,
-    pubsub,
-  },
+mongo.connect();
+/*
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+const db = mongoose.connection;
+db.once('open', () => {
+    console.log("MongoDB connected!");
+    wss.on('connection', (ws) => {
+        // Define WebSocket connection logic
+        console.log('Server connected');
+        ws.box = '';
+        ws.onmessage = wsConnect.onMessage(ws, wss); 
+    });
 });
-
-server.start({ port: process.env.PORT | 5000 }, () => {
-  console.log(`The server is up on port ${process.env.PORT | 5000}!`);
+*/
+const port = process.env.PORT || 4000;
+server.listen({port}, () => {
+    console.log(`Listening on http://localhost:${port}`);
 });

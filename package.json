@@ -1,0 +1,15 @@
+{
+  "name": "modern-graphql-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/shaoruu/modern-graphql-tutorial.git",
+  "author": "jim0112 <b08902015@csie.ntu.edu.tw>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd frontend && yarn start",
+    "server": "cd backend && yarn server"
+  },
+  "dependencies": {
+    "antd": "^5.0.5"
+  }
+}
